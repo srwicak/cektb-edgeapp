@@ -3,5 +3,4 @@ httpx
 numpy<2
 pillow
 python-multipart
-#tflite # runtime untuk tensorflow lite
-ai-edge-litert
+tflite # runtime untuk tensorflow lite
