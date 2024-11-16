@@ -8,7 +8,7 @@ source venv/bin/activate
 
 # Jalankan server FastAPI
 echo "Memulai server..."
-fastapi run main.py &
+fastapi run backend/main.py &
 
 # Tunggu server siap
 sleep 5
