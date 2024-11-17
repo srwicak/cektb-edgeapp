@@ -4,21 +4,8 @@ from predict import predict
 from utils import send_data_to_server
 from pathlib import Path
 import time
-from fastapi.logger import logger
-# from backend.authentication import validate_local_password, authenticate_server
-# from backend.model_manager import check_model_version, download_model
 
 app = FastAPI()
-
-# Path data
-DATA_PATH = Path("data/local_data.json")
-MODEL_PATH = Path("data/current_model.tflite")
-CREDENTIALS_PATH = Path("data/credentials.json")
-
-# @app.get("/")
-# def read_root():
-#   return {"Hello": "World"}
-
 
 # Fungsi membaca UI HTML
 @app.get("/", response_class=HTMLResponse)
@@ -33,7 +20,6 @@ async def predict_endpoint(
     bpjs: str = Form(...),
     file: UploadFile = File(...),
 ):
-    logger.info(f"Received: name={name}, bpjs={bpjs}, file={file.filename}")
     try:
         # Periksa format file
         if not file.content_type.startswith("image/"):
@@ -59,19 +45,6 @@ async def predict_endpoint(
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error dalam memproses gambar: {str(e)}")
-      
-# # Endpoint login lokal
-# @app.post("/local-login")
-# async def local_login(password: str = Depends(validate_local_password)):
-#     return {"message": "Login successful"}
-
-
-# # Endpoint untuk prediksi lokal
-# @app.post("/predict")
-# async def predict(data: dict):
-#     # Placeholder untuk logika prediksi
-#     return {"message": "Offline prediction result", "data": data}
-
 
 # # Endpoint sinkronisasi data ke server
 # @app.post("/sync-data")
